@@ -51,19 +51,18 @@ class UserController extends Controller
         return back();
     }
 
-    // user list 
+    // user list
 
     public function list()
     {
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->paginate(10);
         return view('backend.user.list', compact('users'));
     }
 
-    // user store 
+    // user store
 
     public function store(UserStoreRequest $request)
     {
- 
             $user = User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
@@ -71,7 +70,7 @@ class UserController extends Controller
             ]);
 
             session()->flash('success', 'User Added successfully');
-      
+
         return back();
 
 

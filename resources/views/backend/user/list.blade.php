@@ -1,22 +1,14 @@
 @extends('backend.layout.master')
-@section('title', 'Profile')
+@section('title', 'Users')
 @section('content')
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-        <!--begin::Content wrapper-->
         <div class="d-flex flex-column flex-column-fluid">
-            <!--begin::Toolbar-->
             <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-                <!--begin::Toolbar container-->
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-                    <!--begin::Page title-->
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                        <!--begin::Title-->
                         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Users
-                            List</h1>
-                        <!--end::Title-->
-                        <!--begin::Breadcrumb-->
+                             List</h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                            <!--begin::Item-->
                             <li class="breadcrumb-item text-muted">
                                 <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
                             </li>
@@ -382,19 +374,14 @@
                                                 <form id="kt_modal_add_user_form" class="form"
                                                     action="{{ route('user.store') }}" method="post">
                                                     @csrf
-                                                    <!--begin::Scroll-->
                                                     <div class="d-flex flex-column scroll-y px-5 px-lg-10"
                                                         id="kt_modal_add_user_scroll" data-kt-scroll="true"
                                                         data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
                                                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
                                                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
                                                         data-kt-scroll-offset="300px">
-                                                        <!--begin::Input group-->
                                                         <div class="fv-row mb-7">
-                                                            <!--begin::Label-->
                                                             <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Image placeholder-->
                                                             <style>
                                                                 .image-input-placeholder {
                                                                     background-image: url('assets/media/svg/files/blank-image.svg');
@@ -404,16 +391,11 @@
                                                                     background-image: url('assets/media/svg/files/blank-image-dark.svg');
                                                                 }
                                                             </style>
-                                                            <!--end::Image placeholder-->
-                                                            <!--begin::Image input-->
                                                             <div class="image-input image-input-outline image-input-placeholder"
                                                                 data-kt-image-input="true">
-                                                                <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
                                                                     style="background-image: url(assets/media/avatars/300-6.jpg);">
                                                                 </div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
                                                                 <label
                                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                                     data-kt-image-input-action="change"
@@ -422,14 +404,10 @@
                                                                         <span class="path1"></span>
                                                                         <span class="path2"></span>
                                                                     </i>
-                                                                    <!--begin::Inputs-->
                                                                     <input type="file" name="avatar"
                                                                         accept=".png, .jpg, .jpeg" />
                                                                     <input type="hidden" name="avatar_remove" />
-                                                                    <!--end::Inputs-->
                                                                 </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
                                                                 <span
                                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                                     data-kt-image-input-action="cancel"
@@ -439,8 +417,6 @@
                                                                         <span class="path2"></span>
                                                                     </i>
                                                                 </span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
                                                                 <span
                                                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                                     data-kt-image-input-action="remove"
@@ -450,16 +426,10 @@
                                                                         <span class="path2"></span>
                                                                     </i>
                                                                 </span>
-                                                                <!--end::Remove-->
                                                             </div>
-                                                            <!--end::Image input-->
-                                                            <!--begin::Hint-->
                                                             <div class="form-text">Allowed file types: png, jpg, jpeg.
                                                             </div>
-                                                            <!--end::Hint-->
                                                         </div>
-                                                        <!--end::Input group-->
-                                                        <!--begin::Input group-->
                                                         <div class="fv-row mb-7">
                                                             <!--begin::Label-->
                                                             <label class="required fw-semibold fs-6 mb-2">Full Name</label>
@@ -487,59 +457,38 @@
                                                         <!--end::Input group-->
                                                         <!--begin::Input group-->
                                                         <div class="mb-5">
-                                                        <!--begin::Label-->
-                                                        <label class="required fw-semibold fs-6 mb-5">Role</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Roles-->
-                                                        <!--begin::Input row-->
-                                                        <div class="d-flex fv-row">
-                                                            <!--begin::Radio-->
-                                                            <div class="form-check form-check-custom form-check-solid">
-                                                                <!--begin::Input-->
-                                                                <input class="form-check-input me-3" name="role" type="radio" value="admin" id="kt_modal_update_role_option_0" checked='checked' />
-                                                                <!--end::Input-->
-                                                                <!--begin::Label-->
-                                                                <label class="form-check-label" for="kt_modal_update_role_option_0">
-                                                                    <div class="fw-bold text-gray-800">admin</div>
-                                                                    <div class="text-gray-600">Best for business owners and company administrators</div>
-                                                                </label>
-                                                                <!--end::Label-->
+                                                        <label class="required fw-semibold fs-6 mb-2">Role</label>
+
+                                                        <div class="mb-5">
+                                                            <div class="w-100">
+                                                                <!--begin::Select2-->
+                                                                <select class="form-select form-select-solid" id="role" name="role" data-control="select2" data-hide-search="true" data-placeholder="Select user role">
+                                                                    <option value="">
+                                                                        {{ __('Select user role') }}
+                                                                    </option>
+                                                                    <option value="admin">
+                                                                        {{ __('admin') }}
+                                                                    </option>
+                                                                    <option value="customer">
+                                                                        {{ __('customer') }}
+                                                                    </option>
+                                                                    <option value="user">
+                                                                        {{ __('user') }}
+                                                                    </option>
+                                                                </select>
                                                             </div>
-                                                            <!--end::Radio-->
+                                                            <div class="error-message text-danger"></div>
                                                         </div>
-                                                        <!--end::Input row-->
-                                                        <div class='separator separator-dashed my-5'></div>
-                                                        <!--begin::Input row-->
-                                                        <div class="d-flex fv-row">
-                                                            <!--begin::Radio-->
-                                                            <div class="form-check form-check-custom form-check-solid">
-                                                                <!--begin::Input-->
-                                                                <input class="form-check-input me-3" name="role" type="radio" value="user" id="kt_modal_update_role_option_1" />
-                                                                <!--end::Input-->
-                                                                <!--begin::Label-->
-                                                                <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                                    <div class="fw-bold text-gray-800">user</div>
-                                                                    <div class="text-gray-600">Best for developers or people primarily using the API</div>
-                                                                </label>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Radio-->
-                                                        </div>
-                                                        <!--end::Input row-->
-                                      
-                                                        <!--end::Roles-->
+
+
                                                     </div>
-                                                        <!--end::Input group-->
                                                     </div>
-                                                    <!--end::Scroll-->
-                                                    <!--begin::Actions-->
                                                     <div class="text-center pt-10">
                                                         <button type="reset" class="btn btn-light me-3"
                                                             data-kt-users-modal-action="cancel">Discard</button>
-                                                        <button type="submit" class="btn btn-primary"
-                                                            data-kt-users-modal-action="submit">
+                                                        <button type="submit" class="btn btn-primary">
                                                             <span class="indicator-label">Submit</span>
-                                                            <span class="indicator-progress">Please wait...
+                                                            <span class="indicator-progress">Submit
                                                                 <span
                                                                     class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                         </button>
@@ -581,7 +530,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-gray-600 fw-semibold">
-
                                     @foreach ($users as $key => $user)
                                         <tr>
                                             <td>
@@ -640,10 +588,14 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                             <!--end::Table-->
+                            <div class="d-flex justify-content-center">
+                                <nav aria-label="Page navigation">
+                                    {{ $users->links() }}
+                                </nav>
+                            </div>
                         </div>
                         <!--end::Card body-->
                     </div>
@@ -672,7 +624,8 @@
             method: 'POST',
             data: $(this).serialize(),
             success: function(response) {
-                $('#kt_modal_add_user_form').modal('hide');
+                console.log(response);
+                $('#kt_modal_add_user').modal('hide');
             },
             error: function(xhr, status, error) {
                 var response = xhr.responseJSON;
