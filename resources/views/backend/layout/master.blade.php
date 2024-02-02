@@ -83,6 +83,7 @@
     <script src="{{ asset('assets/backend') }}/js/custom/apps/user-management/users/list/table.js"></script>
     <script src="{{ asset('assets/backend') }}/js/custom/apps/user-management/users/list/export-users.js"></script>
     <script src="{{ asset('assets/backend') }}/js/custom/apps/user-management/users/list/add.js"></script>
+    @yield('script')
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/backend') }}/js/widgets.bundle.js"></script>
     <script src="{{ asset('assets/backend') }}/js/custom/widgets.js"></script>
