@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use App\DataTables\Backend\UsersDataTable;
 class UserController extends Controller
 {
     // get user info
@@ -53,10 +53,18 @@ class UserController extends Controller
 
     // user list
 
-    public function list()
+    // public function list()
+    // {
+    //     $users = User::orderBy('id', 'desc')->paginate(10);
+    //     return view('backend.user.list', compact('users'));
+    // }
+
+    public function list(UsersDataTable $usersDataTable)
     {
-        $users = User::orderBy('id', 'desc')->paginate(10);
-        return view('backend.user.list', compact('users'));
+
+        return $usersDataTable->render('backend.user.list');
+
+
     }
 
     // user store
