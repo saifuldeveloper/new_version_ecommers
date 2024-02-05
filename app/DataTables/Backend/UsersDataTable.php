@@ -33,7 +33,6 @@ class UsersDataTable extends DataTable
                 return view('backend.user.column.login_time', compact('query'));
             })
 
-
             ->setRowId('id')
             ->setRowClass(function ($query) {
                 return $query->someCondition ? 'ext-start text-muted fw-bold fs-7 text-uppercase gs-0' : '';
@@ -50,6 +49,7 @@ class UsersDataTable extends DataTable
             $query->where('name', 'like', '%' . $value . '%')
                 ->orWhere('email', 'like', '%' . $value . '%');
         })
+        ->orderBy('id', 'desc')
         ->newQuery();
     }
 
@@ -95,9 +95,6 @@ class UsersDataTable extends DataTable
                 'searching' => true,
                 'info' => true,
                 'searchDelay' => 350,
-                'searchClasses' => [
-                    'input' => 'form-control form-control-solid w-250px ps-13',
-                ],
                 'language' => [
                     'lengthMenu' => __('Per Page') . ' _MENU_ ',
                     'searchPlaceholder' => __('search user'),
