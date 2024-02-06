@@ -9,8 +9,7 @@
                 <h2 class="fw-bold">Add User</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-icon-primary"
-                    data-kt-users-modal-action="close">
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
                     <i class="ki-duotone ki-cross fs-1">
                         <span class="path1"></span>
                         <span class="path2"></span>
@@ -22,15 +21,13 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form"
-                    action="{{ route('user.store') }}" method="post">
+                <form id="kt_modal_add_user_form" class="form" action="{{ route('user.store') }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
-                    <div class="d-flex flex-column scroll-y px-5 px-lg-10"
-                        id="kt_modal_add_user_scroll" data-kt-scroll="true"
-                        data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
+                    <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
+                        data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
-                        data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
-                        data-kt-scroll-offset="300px">
+                        data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                         <div class="fv-row mb-7">
                             <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
                             <style>
@@ -49,20 +46,17 @@
                                 </div>
                                 <label
                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="change"
-                                    data-bs-toggle="tooltip" title="Change avatar">
+                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     <i class="ki-duotone ki-pencil fs-7">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                     </i>
-                                    <input type="file" name="avatar"
-                                        accept=".png, .jpg, .jpeg" />
+                                    <input type="file" name="image" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                 </label>
                                 <span
                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="cancel"
-                                    data-bs-toggle="tooltip" title="Cancel avatar">
+                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
                                     <i class="ki-duotone ki-cross fs-2">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -70,8 +64,7 @@
                                 </span>
                                 <span
                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="remove"
-                                    data-bs-toggle="tooltip" title="Remove avatar">
+                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
                                     <i class="ki-duotone ki-cross fs-2">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -80,6 +73,7 @@
                             </div>
                             <div class="form-text">Allowed file types: png, jpg, jpeg.
                             </div>
+                            <div class="error-message text-danger" id="image-error"></div>
                         </div>
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -87,10 +81,10 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="text" name="name" id="name"
-                                class="form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="Full name" value="Emma Smith" />
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name"
+                                value="Emma Smith" />
                             <!--end::Input-->
-                            <div class="error-message text-danger"></div>
+                            <div class="error-message text-danger" id="name-error"></div>
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
@@ -100,39 +94,26 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="email" name="email" id="email"
-                                class="form-control form-control-solid mb-3 mb-lg-0"
-                                placeholder="example@domain.com" value="smith@kpmg.com" />
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com"
+                                value="smith@kpmg.com" />
                             <!--end::Input-->
-                            <div class="error-message text-danger"></div>
+                            <div class="error-message text-danger" id="email-error"></div>
                         </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
                         <div class="mb-5">
-                        <label class="required fw-semibold fs-6 mb-2">Role</label>
+                            <label class="required fw-semibold fs-6 mb-2">Role</label>
 
-                        <div class="mb-5">
                             <div class="w-100">
                                 <!--begin::Select2-->
-                                <select class="form-select form-select-solid" id="role" name="role" data-control="select2" data-hide-search="true" data-placeholder="Select user role">
-                                    <option value="">
-                                        {{ __('Select user role') }}
-                                    </option>
-                                    <option value="admin">
-                                        {{ __('admin') }}
-                                    </option>
-                                    <option value="customer">
-                                        {{ __('customer') }}
-                                    </option>
-                                    <option value="user">
-                                        {{ __('user') }}
-                                    </option>
+                                <select class="form-select form-select-solid" id="role" name="role"
+                                    data-control="select2" data-hide-search="true" data-placeholder="Select user role">
+                                    <option value="">Select user role</option>
+                                    <option value="admin">admin</option>
+                                    <option value="customer">customer</option>
+                                    <option value="user">user</option>
                                 </select>
                             </div>
-                            <div class="error-message text-danger"></div>
+                            <div class="error-message text-danger" id="role-error"></div>
                         </div>
-
-
-                    </div>
                     </div>
                     <div class="text-center pt-10">
                         <button type="reset" class="btn btn-light me-3"
@@ -140,8 +121,7 @@
                         <button type="submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Submit
-                                <span
-                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
                     </div>
                     <!--end::Actions-->
