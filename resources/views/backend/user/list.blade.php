@@ -341,6 +341,47 @@
                 });
             });
 
+            $(document).on('click', '#deleteUser', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('user-id');
+                var deleteUrl = "{{ route('user.delete', ['id' => ':id']) }}";
+                deleteUrl = deleteUrl.replace(':id', userId);
+                Swal.fire({
+                    text: `Are you sure you want to delete this user?`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-danger",
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: deleteUrl,
+                            method: 'POST',
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                if (response.error) {
+                                    handleError(response.error);
+                                } else {
+                                    handleSuccess(response.message);
+                                }
+                                window.location.href = "{{ route('user.list') }}";
+                            },
+                            error: function(xhr, status, error) {
+                                handleError('Error: Something went wrong');
+                            }
+                        });
+                    }
+                });
+            });
+
             function handleSuccess(message) {
                 configureToastr();
                 toastr.success(message);
