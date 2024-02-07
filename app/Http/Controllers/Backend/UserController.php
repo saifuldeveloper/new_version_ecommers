@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\DataTables\Backend\UsersDataTable;
+
 class UserController extends Controller
 {
     // get user info
@@ -52,42 +53,31 @@ class UserController extends Controller
     }
 
     // user list
-
-    // public function list()
-    // {
-    //     $users = User::orderBy('id', 'desc')->paginate(10);
-    //     return view('backend.user.list', compact('users'));
-    // }
-
     public function list(UsersDataTable $usersDataTable)
     {
 
         return $usersDataTable->render('backend.user.list');
-
-
     }
 
     // user store
 
     public function store(UserStoreRequest $request)
     {
-            $user = User::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => bcrypt('12345'), // Hash the password
-            ]);
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'role' => $request->role,
+            'password' => bcrypt('12345'), // Hash the password
+        ]);
 
-            session()->flash('success', 'User Added successfully');
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->storeAs('backend/user', Str::uuid() . '.' .  $request->file('image')->getClientOriginalName(), 'public');
+            $user->image = $filePath;
+            $user->save();
+        }
+
+        session()->flash('success', 'User Added successfully');
 
         return back();
-
-
-
     }
-
-
-
-
-
-
 }

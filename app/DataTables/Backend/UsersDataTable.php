@@ -45,12 +45,12 @@ class UsersDataTable extends DataTable
     public function query(User $model): QueryBuilder
     {
         return $model
-        ->when($this->request->search['value'] ?? false, function ($query, $value) {
-            $query->where('name', 'like', '%' . $value . '%')
-                ->orWhere('email', 'like', '%' . $value . '%');
-        })
-        ->orderBy('id', 'desc')
-        ->newQuery();
+            ->when($this->request->search['value'] ?? false, function ($query, $value) {
+                $query->where('name', 'like', '%' . $value . '%')
+                    ->orWhere('email', 'like', '%' . $value . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->newQuery();
     }
 
     public function getTotalCount(): int
@@ -89,7 +89,7 @@ class UsersDataTable extends DataTable
             }',
                 'tfoot' => false,
                 'buttons' => [],
-                'pageLength' => 50,
+                'pageLength' => 10,
                 'lengthMenu' => [10, 25, 50, 100, 250],
                 'paging' => true,
                 'searching' => true,
@@ -100,7 +100,7 @@ class UsersDataTable extends DataTable
                     'searchPlaceholder' => __('search user'),
                     'search' => '',
                 ],
-                
+
 
             ]);
     }
