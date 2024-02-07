@@ -7,7 +7,7 @@
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Users
-                            List</h1>
+                             List</h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">
                                 <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
@@ -259,11 +259,11 @@
                                 </div>
                                 <!--end::Group actions-->
                                 <!--begin::Modal - Adjust Balance-->
-                                @include('backend.user.modal.export')
-
+                                    @include('backend.user.modal.export')
+                                
                                 <!--end::Modal - New Card-->
                                 <!--begin::Modal - Add task-->
-                                @include('backend.user.modal.create');
+                                   @include('backend.user.modal.create');
                                 <!--end::Modal - Add task-->
                             </div>
                             <!--end::Card toolbar-->
@@ -290,48 +290,45 @@
 
 
 
-    <script>
-        $(document).ready(function() {
-            const form = document.getElementById('kt_modal_add_user_form');
-            $('#kt_modal_add_user_form').submit(function(event) {
-                event.preventDefault();
-                const formData = new FormData(form);
-                const endpoint = form.action;
-                $.ajax({
-                    url: endpoint,
-                    method: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        console.log(response);
-                        $('#kt_modal_add_user').modal('hide');
-                        window.location.href = "{{ route('user.list') }}";
-                    },
-                    error: function(xhr, status, error) {
-                        var response = xhr.responseJSON;
-                        console.log(response);
+<script>
+   $(document).ready(function() {
+    const form = document.getElementById('kt_modal_add_user_form');
+    $('#kt_modal_add_user_form').submit(function(event) {
+        event.preventDefault();
+        const endpoint = form.action;
+        $.ajax({
+            url: endpoint,
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                console.log(response);
+                $('#kt_modal_add_user').modal('hide');
+            },
+            error: function(xhr, status, error) {
+                var response = xhr.responseJSON;
+                console.log(response);
 
-                        if (response && response.errors) {
-                            $('.error-message').text('');
+                if (response && response.errors) {
+                    // Clear existing error messages
+                    $('.error-message').text('');
 
-                            $.each(response.errors, function(key, value) {
-                                var errorMessageContainer = $('#' + key +
-                                '-error');
-                                errorMessageContainer.text(value[0]);
-                            });
-                        } else {
-                            console.log('An unexpected error occurred.');
-                        }
-                    }
-                });
-            });
+                    $.each(response.errors, function(key, value) {
+                        var errorMessageContainer = $('#' + key).next('.error-message');
+                        errorMessageContainer.text(value[0]);
+                    });
+                } else {
+                    console.log('An unexpected error occurred.');
+                }
+            }
         });
-    </script>
+    });
+});
 
+
+</script>
     {!! $dataTable->scripts() !!}
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#users-table').DataTable();
         });
     </script>
@@ -340,3 +337,4 @@
 
 
 @endsection
+
