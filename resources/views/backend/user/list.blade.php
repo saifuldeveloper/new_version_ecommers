@@ -295,6 +295,11 @@
             const form = document.getElementById('kt_modal_add_user_form');
             $('#kt_modal_add_user_form').submit(function(event) {
                 event.preventDefault();
+
+                // Disable submit button and show loading spinner
+                $('#UserCreateButton').prop('disabled', true);
+                $('#UserCreateButton .spinner-border').removeClass('d-none');
+
                 const formData = new FormData(form);
                 const endpoint = form.action;
                 $.ajax({
@@ -306,9 +311,15 @@
                     success: function(response) {
                         console.log(response);
                         $('#kt_modal_add_user').modal('hide');
+                        if (response.error) {
+                            handleError(response.error);
+                        } else {
+                            handleSuccess(response.message);
+                        }
                         window.location.href = "{{ route('user.list') }}";
                     },
                     error: function(xhr, status, error) {
+                        handleError('Error: Something went wrong');
                         var response = xhr.responseJSON;
                         console.log(response);
 
@@ -317,15 +328,52 @@
 
                             $.each(response.errors, function(key, value) {
                                 var errorMessageContainer = $('#' + key +
-                                '-error');
+                                    '-error');
                                 errorMessageContainer.text(value[0]);
                             });
                         } else {
                             console.log('An unexpected error occurred.');
                         }
+                    },
+                    complete: function() {
+                        // Enable submit button and hide loading spinner
+                        $('#UserCreateButton').prop('disabled', false);
+                        $('#UserCreateButton .spinner-border').addClass('d-none');
                     }
                 });
             });
+
+            function handleSuccess(message) {
+                configureToastr();
+                toastr.success(message);
+                console.log(message);
+            }
+
+            function handleError(error) {
+                configureToastr();
+                toastr.error(error);
+                console.error(error);
+            }
+
+            function configureToastr() {
+                toastr.options = {
+                    closeButton: false,
+                    debug: false,
+                    newestOnTop: false,
+                    progressBar: false,
+                    positionClass: "toastr-top-right",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    timeOut: "5000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                };
+            }
         });
     </script>
 

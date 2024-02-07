@@ -63,21 +63,26 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'role' => $request->role,
-            'password' => bcrypt('12345'), // Hash the password
-        ]);
+        try {
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'role' => $request->role,
+                'password' => bcrypt('12345'), // Hash the password
+            ]);
 
-        if ($request->hasFile('image')) {
-            $filePath = $request->file('image')->storeAs('backend/user', Str::uuid() . '.' .  $request->file('image')->getClientOriginalName(), 'public');
-            $user->image = $filePath;
-            $user->save();
+            if ($request->hasFile('image')) {
+                $filePath = $request->file('image')->storeAs('backend/user', Str::uuid() . '.' .  $request->file('image')->getClientOriginalName(), 'public');
+                $user->image = $filePath;
+                $user->save();
+            }
+            return response()->json([
+                'message' => "SMTP Connected Successfully",
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error: Something went wrong',
+            ], 500);
         }
-
-        session()->flash('success', 'User Added successfully');
-
-        return back();
     }
 }
