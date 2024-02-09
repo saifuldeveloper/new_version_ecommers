@@ -263,7 +263,8 @@
 
                                 <!--end::Modal - New Card-->
                                 <!--begin::Modal - Add task-->
-                                @include('backend.user.modal.create');
+                                @include('backend.user.modal.create')
+                                @include('backend.user.modal.edit')
                                 <!--end::Modal - Add task-->
                             </div>
                             <!--end::Card toolbar-->
@@ -341,6 +342,56 @@
                 });
             });
 
+            const userUpdateform = document.getElementById('kt_modal_edit_user_form');
+            $('#kt_modal_edit_user_form').submit(function(event) {
+                event.preventDefault();
+
+                // Disable submit button and show loading spinner
+                $('#UserUpdateButton').prop('disabled', true);
+                $('#UserUpdateButton .spinner-border').removeClass('d-none');
+
+                const formData = new FormData(userUpdateform);
+                const endpoint = userUpdateform.action;
+                $.ajax({
+                    url: endpoint,
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#kt_modal_edit_user').modal('hide');
+                        if (response.error) {
+                            handleError(response.error);
+                        } else {
+                            handleSuccess(response.message);
+                        }
+                        window.location.href = "{{ route('user.list') }}";
+                    },
+                    error: function(xhr, status, error) {
+                        handleError('Error: Something went wrong');
+                        var response = xhr.responseJSON;
+                        console.log(response);
+
+                        if (response && response.errors) {
+                            $('.error-message').text('');
+
+                            $.each(response.errors, function(key, value) {
+                                var errorMessageContainer = $('#' + key +
+                                    '-error');
+                                errorMessageContainer.text(value[0]);
+                            });
+                        } else {
+                            console.log('An unexpected error occurred.');
+                        }
+                    },
+                    complete: function() {
+                        // Enable submit button and hide loading spinner
+                        $('#UserUpdateButton').prop('disabled', false);
+                        $('#UserUpdateButton .spinner-border').addClass('d-none');
+                    }
+                });
+            });
+
             $(document).on('click', '#deleteUser', function(e) {
                 e.preventDefault();
                 var userId = $(this).data('user-id');
@@ -380,6 +431,36 @@
                         });
                     }
                 });
+            });
+
+            $(document).on('click', '#edit-user', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('user-id');
+                var userName = $(this).data('user-name');
+                var userEmail = $(this).data('user-email');
+                var userRole = $(this).data('user-role');
+                var userImage = $(this).data('user-image');
+
+                // Set the form values in the modal
+                $('#user_id').val(userId);
+                $('#user-name').val(userName);
+                $('#user-email').val(userEmail);
+                $('#role option').each(function() {
+                    if ($(this).val() == userRole) {
+                        $(this).attr('selected', 'selected');
+                    } else {
+                        $(this).removeAttr('selected');
+                    }
+                });
+                $('#role').trigger('change');
+
+                var imageUrl = "{{ asset('storage/') }}" + "/" + userImage;
+                $('#userImage').css('background-image', 'url(' + imageUrl + ')');
+
+                // var encodedImageName = encodeURIComponent(userImage);
+                // var imageUrl = "{{ asset('storage/') }}" + "/" + encodedImageName;
+                // $('#userImage').css('background-image', 'url(' + imageUrl + ')');
+
             });
 
             function handleSuccess(message) {

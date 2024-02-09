@@ -1,12 +1,12 @@
-<div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kt_modal_edit_user" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Modal header-->
-            <div class="modal-header" id="kt_modal_add_user_header">
+            <div class="modal-header" id="kt_modal_edit_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">Add User</h2>
+                <h2 class="fw-bold">Update User</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -21,7 +21,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" action="{{ route('user.store') }}" method="post"
+                <form id="kt_modal_edit_user_form" class="form" action="{{route('user.update')}}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -41,7 +41,7 @@
                             </style>
                             <div class="image-input image-input-outline image-input-placeholder"
                                 data-kt-image-input="true">
-                                <div class="image-input-wrapper w-125px h-125px"
+                                <div class="image-input-wrapper w-125px h-125px" id="userImage"
                                     style="background-image: url(assets/media/avatars/300-6.jpg);">
                                 </div>
                                 <label
@@ -75,12 +75,13 @@
                             </div>
                             <div class="error-message text-danger" id="image-error"></div>
                         </div>
+                        <input type="hidden" name="user_id" id="user_id" value="">
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2">Full Name</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" name="name" id="name"
+                            <input type="text" name="name" id="user-name"
                                 class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name"
                                 value="" />
                             <!--end::Input-->
@@ -93,7 +94,7 @@
                             <label class="required fw-semibold fs-6 mb-2">Email</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="email" name="email" id="email"
+                            <input type="email" name="email" id="user-email"
                                 class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com"
                                 value="" />
                             <!--end::Input-->
@@ -118,7 +119,7 @@
                     <div class="text-center pt-10">
                         <button type="reset" class="btn btn-light me-3"
                             data-kt-users-modal-action="cancel">Discard</button>
-                        <button type="submit" class="btn btn-primary" id="UserCreateButton">Submit
+                        <button type="submit" class="btn btn-primary" id="UserUpdateButton">Update
                             <span class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
                         </button>
                     </div>

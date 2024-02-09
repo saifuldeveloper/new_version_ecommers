@@ -72,13 +72,56 @@ class UserController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                $filePath = $request->file('image')->storeAs('backend/user', Str::uuid() . '.' .  $request->file('image')->getClientOriginalName(), 'public');
+                if ($user->image) {
+                    Storage::delete('public/' . $user->image);
+                }
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $fileName = Str::uuid() . '.' . $extension;
+                $filePath = $request->file('image')->storeAs('backend/user', $fileName, 'public');
                 $user->image = $filePath;
                 $user->save();
             }
             return response()->json([
-                'message' => "SMTP Connected Successfully",
+                'message' => "User created Successfully",
             ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error: Something went wrong',
+            ], 500);
+        }
+    }
+
+    // update user
+    public function updateUser(Request $request, User $user)
+    {
+        try {
+            $user =  $user->findOrFail($request->input('user_id'));
+            if ($user) {
+                $user->update([
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'role' => $request->role,
+                ]);
+
+                if ($request->hasFile('image')) {
+                    if ($user->image) {
+                        Storage::delete('public/' . $user->image);
+                    }
+
+                    $extension = $request->file('image')->getClientOriginalExtension();
+                    $fileName = Str::uuid() . '.' . $extension;
+                    $filePath = $request->file('image')->storeAs('backend/user', $fileName, 'public');
+                    $user->image = $filePath;
+                    $user->save();
+                }
+                return response()->json([
+                    'message' => "User updated Successfully",
+                ]);
+            } else {
+                return response()->json([
+                    'message' => "User Not Found",
+                ]);
+            }
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Error: Something went wrong',
