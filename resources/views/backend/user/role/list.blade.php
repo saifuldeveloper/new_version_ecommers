@@ -1,16 +1,16 @@
 @extends('backend.layout.master')
-@section('title', 'Users')
+@section('title', 'Roles')
 @section('content')
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <div class="d-flex flex-column flex-column-fluid">
             <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Users
+                        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Roles
                             List</h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">
-                                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                                <a href="{{ route('dashboard') }}" class="text-muted text-hover-primary">Home</a>
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
@@ -27,7 +27,7 @@
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">Users</li>
+                            <li class="breadcrumb-item text-muted">Role</li>
                             <!--end::Item-->
                         </ul>
                         <!--end::Breadcrumb-->
@@ -242,10 +242,12 @@
                                         </i>Export</button>
                                     <!--end::Export-->
                                     <!--begin::Add user-->
-                                    @can('create-user')
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_add_user">
-                                            <i class="ki-duotone ki-plus fs-2"></i>Add User</button>
+                                    @can('create-role')
+                                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                            <a href="{{ route('role.create') }}" class="btn btn-primary">
+                                                <i class="ki-duotone ki-plus fs-2"></i>Add Role
+                                            </a>
+                                        </div>
                                     @endcan
 
                                     <!--end::Add user-->
@@ -261,14 +263,6 @@
                                         data-kt-user-table-select="delete_selected">Delete Selected</button>
                                 </div>
                                 <!--end::Group actions-->
-                                <!--begin::Modal - Adjust Balance-->
-                                @include('backend.user.modal.export')
-
-                                <!--end::Modal - New Card-->
-                                <!--begin::Modal - Add task-->
-                                @include('backend.user.modal.create')
-                                @include('backend.user.modal.edit')
-                                <!--end::Modal - Add task-->
                             </div>
                             <!--end::Card toolbar-->
                         </div>
@@ -276,7 +270,7 @@
                         <!--begin::Card body-->
                         <div class="card-body py-4">
                             <!--begin::Table-->
-                            {!! $dataTable->table(['class' => 'table align-middle table-row-dashed fs-6 gy-5', 'id' => 'users-table']) !!}
+                            {!! $dataTable->table(['class' => 'table align-middle table-row-dashed fs-6 gy-5', 'id' => 'roles-table']) !!}
                         </div>
                         <!--end::Card body-->
                     </div>
@@ -290,118 +284,15 @@
 
 
 
-
-
     <script>
         $(document).ready(function() {
-            const form = document.getElementById('kt_modal_add_user_form');
-            $('#kt_modal_add_user_form').submit(function(event) {
-                event.preventDefault();
-
-                // Disable submit button and show loading spinner
-                $('#UserCreateButton').prop('disabled', true);
-                $('#UserCreateButton .spinner-border').removeClass('d-none');
-
-                const formData = new FormData(form);
-                const endpoint = form.action;
-                $.ajax({
-                    url: endpoint,
-                    method: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        console.log(response);
-                        $('#kt_modal_add_user').modal('hide');
-                        if (response.error) {
-                            handleError(response.error);
-                        } else {
-                            handleSuccess(response.message);
-                        }
-                        window.location.href = "{{ route('user.list') }}";
-                    },
-                    error: function(xhr, status, error) {
-                        handleError('Error: Something went wrong');
-                        var response = xhr.responseJSON;
-                        console.log(response);
-
-                        if (response && response.errors) {
-                            $('.error-message').text('');
-
-                            $.each(response.errors, function(key, value) {
-                                var errorMessageContainer = $('#' + key +
-                                    '-error');
-                                errorMessageContainer.text(value[0]);
-                            });
-                        } else {
-                            console.log('An unexpected error occurred.');
-                        }
-                    },
-                    complete: function() {
-                        // Enable submit button and hide loading spinner
-                        $('#UserCreateButton').prop('disabled', false);
-                        $('#UserCreateButton .spinner-border').addClass('d-none');
-                    }
-                });
-            });
-
-            const userUpdateform = document.getElementById('kt_modal_edit_user_form');
-            $('#kt_modal_edit_user_form').submit(function(event) {
-                event.preventDefault();
-
-                // Disable submit button and show loading spinner
-                $('#UserUpdateButton').prop('disabled', true);
-                $('#UserUpdateButton .spinner-border').removeClass('d-none');
-
-                const formData = new FormData(userUpdateform);
-                const endpoint = userUpdateform.action;
-                $.ajax({
-                    url: endpoint,
-                    method: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        $('#kt_modal_edit_user').modal('hide');
-                        if (response.error) {
-                            handleError(response.error);
-                        } else {
-                            handleSuccess(response.message);
-                        }
-                        window.location.href = "{{ route('user.list') }}";
-                    },
-                    error: function(xhr, status, error) {
-                        handleError('Error: Something went wrong');
-                        var response = xhr.responseJSON;
-                        console.log(response);
-
-                        if (response && response.errors) {
-                            $('.error-message').text('');
-
-                            $.each(response.errors, function(key, value) {
-                                var errorMessageContainer = $('#' + key +
-                                    '-error');
-                                errorMessageContainer.text(value[0]);
-                            });
-                        } else {
-                            console.log('An unexpected error occurred.');
-                        }
-                    },
-                    complete: function() {
-                        // Enable submit button and hide loading spinner
-                        $('#UserUpdateButton').prop('disabled', false);
-                        $('#UserUpdateButton .spinner-border').addClass('d-none');
-                    }
-                });
-            });
-
-            $(document).on('click', '#deleteUser', function(e) {
+            $(document).on('click', '#deleteRole', function(e) {
                 e.preventDefault();
-                var userId = $(this).data('user-id');
-                var deleteUrl = "{{ route('user.delete', ['id' => ':id']) }}";
-                deleteUrl = deleteUrl.replace(':id', userId);
+                var roleId = $(this).data('role-id');
+                var deleteUrl = "{{ route('role.delete', ['id' => ':id']) }}";
+                deleteUrl = deleteUrl.replace(':id', roleId);
                 Swal.fire({
-                    text: `Are you sure you want to delete this user?`,
+                    text: `Are you sure you want to delete this role?`,
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -420,13 +311,12 @@
                                 "X-CSRF-TOKEN": "{{ csrf_token() }}",
                             },
                             success: function(response) {
-                                console.log(response);
                                 if (response.error) {
                                     handleError(response.error);
                                 } else {
                                     handleSuccess(response.message);
                                 }
-                                window.location.href = "{{ route('user.list') }}";
+                                window.location.href = "{{ route('role.index') }}";
                             },
                             error: function(xhr, status, error) {
                                 handleError('Error: Something went wrong');
@@ -434,36 +324,6 @@
                         });
                     }
                 });
-            });
-
-            $(document).on('click', '#edit-user', function(e) {
-                e.preventDefault();
-                var userId = $(this).data('user-id');
-                var userName = $(this).data('user-name');
-                var userEmail = $(this).data('user-email');
-                var userRole = $(this).data('user-role');
-                var userImage = $(this).data('user-image');
-
-                // Set the form values in the modal
-                $('#user_id').val(userId);
-                $('#user-name').val(userName);
-                $('#user-email').val(userEmail);
-                $('#user_role_select option').each(function() {
-                    if ($(this).val() == userRole) {
-                        $(this).attr('selected', 'selected');
-                    } else {
-                        $(this).removeAttr('selected');
-                    }
-                });
-                $('#user_role_select').trigger('change');
-
-                var imageUrl = "{{ asset('storage/') }}" + "/" + userImage;
-                $('#userImage').css('background-image', 'url(' + imageUrl + ')');
-
-                // var encodedImageName = encodeURIComponent(userImage);
-                // var imageUrl = "{{ asset('storage/') }}" + "/" + encodedImageName;
-                // $('#userImage').css('background-image', 'url(' + imageUrl + ')');
-
             });
 
             function handleSuccess(message) {
@@ -502,7 +362,7 @@
     {!! $dataTable->scripts() !!}
     <script>
         $(document).ready(function() {
-            $('#users-table').DataTable();
+            $('#roles-table').DataTable();
         });
     </script>
 

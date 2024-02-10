@@ -21,7 +21,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_edit_user_form" class="form" action="{{route('user.update')}}" method="post"
+                <form id="kt_modal_edit_user_form" class="form" action="{{ route('user.update') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -105,12 +105,16 @@
 
                             <div class="w-100">
                                 <!--begin::Select2-->
-                                <select class="form-select form-select-solid" id="role" name="role"
+                                <select class="form-select form-select-solid" id="user_role_select" name="role"
                                     data-control="select2" data-hide-search="true" data-placeholder="Select user role">
-                                    <option value="">Select user role</option>
-                                    <option value="admin">admin</option>
-                                    <option value="customer">customer</option>
-                                    <option value="user">user</option>
+                                    <option value="">
+                                        Select a role
+                                    </option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}">
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="error-message text-danger" id="role-error"></div>

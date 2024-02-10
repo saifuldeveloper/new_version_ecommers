@@ -15,3 +15,14 @@ Route::group(['prefix' => 'dashboard/user', 'middleware' => ['auth']], function 
     Route::post('/update', [UserController::class, 'updateUser'])->name('user.update');
     Route::post('/delete-user/{id}', [UserController::class, 'userDelete'])->name('user.delete');
 });
+
+
+// role related routes
+Route::group(['prefix' => 'dashboard/role', 'middleware' => ['auth']], function () {
+    Route::get('/list', [UserController::class, 'roleIndex'])->name('role.index');
+    Route::get('/create', [UserController::class, 'roleCreate'])->name('role.create')->middleware(['can:create-role']);
+    Route::post('/store', [UserController::class, 'roleStore'])->name('role.store');
+    Route::post('/delete-role/{id}', [UserController::class, 'roleDelete'])->name('role.delete');
+    Route::get('/edit/{id}', [UserController::class, 'roleEdit'])->name('role.edit');
+    Route::post('/update/{role}', [UserController::class, 'roleUpdate'])->name('role.update');
+});

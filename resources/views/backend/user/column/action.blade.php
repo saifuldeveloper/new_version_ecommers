@@ -9,7 +9,7 @@
             <a class="dropdown-item menu-link px-3" id="edit-user" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user"
                 data-user-id="{{ $query->id }}" data-user-name="{{ $query->name }}"
                 data-user-email="{{ $query->email }}"
-                data-user-role="{{ $query->role }}" data-user-image="{{ $query->image }}">Edit</a>
+                data-user-role="{{ optional($query->roles->first())->name }}" data-user-image="{{ $query->image }}">Edit</a>
         </li>
         <li class="menu-item px-3">
             <a class="dropdown-item menu-link px-3" id="deleteUser" data-user-id="{{ $query->id }}">Delete</a>

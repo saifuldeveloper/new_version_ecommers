@@ -2,15 +2,15 @@
 
 namespace App\DataTables\Backend;
 
-use App\Models\User;
-use Yajra\DataTables\Html\Column;
+
+use Yajra\DataTables\Services\DataTable;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Yajra\DataTables\Html\Column;
 
-class UsersDataTable extends DataTable
+class RolesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,20 +21,14 @@ class UsersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('userinfo', function ($query) {
-                return view('backend.user.column.userinfo', compact('query'));
-            })
-            ->addColumn('role', function ($query) {
-                return view('backend.user.column.role', compact('query'));
+            ->addColumn('role_name', function ($query) {
+                return view('backend.user.role.column.role_name', compact('query'));
             })
             ->addColumn('created_at', function ($query) {
-                return view('backend.user.column.created_at', compact('query'));
+                return view('backend.user.role.column.created_at', compact('query'));
             })
             ->addColumn('action', function ($query) {
-                return view('backend.user.column.action', compact('query'));
-            })
-            ->addColumn('login_time', function ($query) {
-                return view('backend.user.column.login_time', compact('query'));
+                return view('backend.user.role.column.action', compact('query'));
             })
 
             ->setRowId('id')
@@ -46,12 +40,11 @@ class UsersDataTable extends DataTable
     /**
      * Get query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(Role $model): QueryBuilder
     {
-        return $model->with('roles')
+        return $model
             ->when($this->request->search['value'] ?? false, function ($query, $value) {
-                $query->where('name', 'like', '%' . $value . '%')
-                    ->orWhere('email', 'like', '%' . $value . '%');
+                $query->where('name', 'like', '%' . $value . '%');
             })
             ->orderBy('id', 'desc')
             ->newQuery();
@@ -59,7 +52,7 @@ class UsersDataTable extends DataTable
 
     public function getTotalCount(): int
     {
-        return User::count();
+        return Role::count();
     }
 
     /**
@@ -101,10 +94,11 @@ class UsersDataTable extends DataTable
                 'searchDelay' => 350,
                 'language' => [
                     'lengthMenu' => __('Per Page') . ' _MENU_ ',
-                    'searchPlaceholder' => __('search user'),
+                    'searchPlaceholder' => __('search role'),
                     'search' => '',
                 ],
-                'roles' => $this->roles, // Passing roles data to the view
+
+
             ]);
     }
 
@@ -117,11 +111,9 @@ class UsersDataTable extends DataTable
             Column::computed('id')->data('DT_RowIndex')
                 ->title('#')->searchable(false)
                 ->width(10),
-            Column::computed('userinfo')->title(__('USER'))
+            Column::computed('role_name')->title(__('Name'))
                 ->addClass('min-w-125px'),
-            Column::computed('role')->title(__('ROLE'))->orderable(true),
-            Column::computed('login_time')->title(__('LAST LOGIN')),
-            Column::computed('created_at')->title(__('JOINED DATE')),
+            Column::computed('created_at')->title(__('CREATE DATE')),
             Column::computed('action')
                 ->title(__('ACTION'))
                 ->addClass('text-end min-w-100px'),
@@ -133,6 +125,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Roles_' . date('YmdHis');
     }
 }

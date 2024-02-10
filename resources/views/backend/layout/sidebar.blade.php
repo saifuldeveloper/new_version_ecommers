@@ -111,42 +111,52 @@
 
                      <!--begin: User Menu -->
                      <div data-kt-menu-trigger="click"
-                     class="menu-item here {{ strpos(Route::getCurrentRoute()->uri(), 'dashboard/user/') === 0 ? 'show' : '' }} menu-accordion">
-                     <!--begin:Menu link-->
-                     <span class="menu-link">
-                         <span class="menu-icon">
-                             <i class="ki-duotone ki-chart fs-2">
-                                 <span class="path1"></span>
-                                 <span class="path2"></span>
-                             </i>
+                         class="menu-item here {{ strpos(Route::getCurrentRoute()->uri(), 'dashboard/user/') === 0 ? 'show' : '' }} {{ strpos(Route::getCurrentRoute()->uri(), 'dashboard/role/') === 0 ? 'show' : '' }} menu-accordion">
+                         <!--begin:Menu link-->
+                         <span class="menu-link">
+                             <span class="menu-icon">
+                                 <i class="ki-duotone ki-chart fs-2">
+                                     <span class="path1"></span>
+                                     <span class="path2"></span>
+                                 </i>
+                             </span>
+                             <span class="menu-title">User Manager</span>
+                             <span class="menu-arrow"></span>
                          </span>
-                         <span class="menu-title">User Manager</span>
-                         <span class="menu-arrow"></span>
-                     </span>
-                     <!--end:Menu link-->
+                         <!--end:Menu link-->
 
-                     <!--begin:Menu sub-->
-                     <div class="menu-sub menu-sub-accordion">
-                         <!--begin:Menu item-->
-                         <div class="menu-item">
-                             <!--begin:Menu link-->
-                             <a class="menu-link {{ Route::getCurrentRoute()->uri() == 'dashboard/user/list' ? 'active' : '' }}"
-                                 href="{{ route('user.list') }}">
-                                 <span class="menu-bullet">
-                                     <span class="bullet bullet-dot"></span>
-                                 </span>
-                                 <span class="menu-title">User list</span>
-                             </a>
-                             <!--end:Menu link-->
+                         <!--begin:Menu sub-->
+                         <div class="menu-sub menu-sub-accordion">
+                             <!--begin:Menu item-->
+                             <div class="menu-item">
+                                 <!--begin:Menu link-->
+                                 <a class="menu-link {{ Route::getCurrentRoute()->uri() == 'dashboard/user/list' ? 'active' : '' }}"
+                                     href="{{ route('user.list') }}">
+                                     <span class="menu-bullet">
+                                         <span class="bullet bullet-dot"></span>
+                                     </span>
+                                     <span class="menu-title">User list</span>
+                                 </a>
+                                 <!--end:Menu link-->
+                             </div>
+                             <!--end:Menu item-->
+
+                             <div class="menu-item">
+                                 <a class="menu-link {{ strpos(Route::getCurrentRoute()->uri(), 'dashboard/role') === 0 ? 'active' : '' }}"
+                                     href="{{ route('role.index') }}">
+                                     <span class="menu-bullet">
+                                         <span class="bullet bullet-dot"></span>
+                                     </span>
+                                     <span class="menu-title">Roles</span>
+                                 </a>
+                             </div>
+
+                             <!--end:Menu sub-->
                          </div>
-                         <!--end:Menu item-->
-        
                          <!--end:Menu sub-->
                      </div>
-                     <!--end:Menu sub-->
-                 </div>
-                   <!--end:User Menu-->
-                     
+                     <!--end:User Menu-->
+
 
 
 
