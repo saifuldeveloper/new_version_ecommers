@@ -1,0 +1,29 @@
+.padding-100{
+    padding: 50px 0;
+}
+
+.single__price {
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0px 10px 40px 0px rgba(43.00000000000019, 27, 154, 0.1);
+}
+.single__price  a.price__btn {
+    color: #2B1B9A;
+    font-weight: 600;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #E3DFFF;
+    border-radius: 50px 50px 50px 50px;
+    height: 50px;
+    padding: 10px 30px 10px 30px;
+}
+.single__price:hover {
+    color: #FFFFFF;
+    background-color: #438FF9;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0px 10px 40px 0px rgba(43.00000000000019, 27, 154, 0.1);
+}
+.single__price__header {
+    width: 100%;
+}
+
