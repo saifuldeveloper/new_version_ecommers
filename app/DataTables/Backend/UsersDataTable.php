@@ -3,11 +3,12 @@
 namespace App\DataTables\Backend;
 
 use App\Models\User;
-use Yajra\DataTables\Services\DataTable;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
+use Spatie\Permission\Models\Role;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UsersDataTable extends DataTable
 {
@@ -22,6 +23,9 @@ class UsersDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('userinfo', function ($query) {
                 return view('backend.user.column.userinfo', compact('query'));
+            })
+            ->addColumn('role', function ($query) {
+                return view('backend.user.column.role', compact('query'));
             })
             ->addColumn('created_at', function ($query) {
                 return view('backend.user.column.created_at', compact('query'));
@@ -44,7 +48,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model
+        return $model->with('roles')
             ->when($this->request->search['value'] ?? false, function ($query, $value) {
                 $query->where('name', 'like', '%' . $value . '%')
                     ->orWhere('email', 'like', '%' . $value . '%');
@@ -100,8 +104,7 @@ class UsersDataTable extends DataTable
                     'searchPlaceholder' => __('search user'),
                     'search' => '',
                 ],
-
-
+                'roles' => $this->roles, // Passing roles data to the view
             ]);
     }
 

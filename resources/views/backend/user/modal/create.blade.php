@@ -82,7 +82,7 @@
                             <!--begin::Input-->
                             <input type="text" name="name" id="name"
                                 class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name"
-                                value="Emma Smith" />
+                                value="" />
                             <!--end::Input-->
                             <div class="error-message text-danger" id="name-error"></div>
                         </div>
@@ -95,7 +95,7 @@
                             <!--begin::Input-->
                             <input type="email" name="email" id="email"
                                 class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com"
-                                value="smith@kpmg.com" />
+                                value="" />
                             <!--end::Input-->
                             <div class="error-message text-danger" id="email-error"></div>
                         </div>
@@ -103,13 +103,14 @@
                             <label class="required fw-semibold fs-6 mb-2">Role</label>
 
                             <div class="w-100">
-                                <!--begin::Select2-->
                                 <select class="form-select form-select-solid" id="role" name="role"
                                     data-control="select2" data-hide-search="true" data-placeholder="Select user role">
-                                    <option value="">Select user role</option>
-                                    <option value="admin">admin</option>
-                                    <option value="customer">customer</option>
-                                    <option value="user">user</option>
+                                    <option value="">
+                                        Select a role
+                                    </option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="error-message text-danger" id="role-error"></div>

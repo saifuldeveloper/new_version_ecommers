@@ -1,0 +1,408 @@
+@media only screen and (max-width: 1920px){
+.header_slider .first_slider_info { 
+		left: 400px;
+	}
+}
+@media only screen and (max-width: 1680px){
+	.header_slider .first_slider_info {
+		left: 202px;
+	}
+}
+@media only screen and (max-width: 1440px){
+	.header_slider .first_slider_info { 
+		left: 162px;
+	}
+}
+@media only screen and (max-width: 1366px){
+	.header_slider .first_slider_info {
+		left: 126px;
+	}
+}
+
+@media only screen and (max-width: 1200px){
+.header_slider .first_slider_info { 
+		left: 110px;
+	}
+.container, .container-lg, .container-md, .container-sm {
+	max-width: 1000px;
+}
+.navbar-light .navbar-nav .nav-link {
+	padding-left: 12px;
+	padding-right: 12px;
+}
+.ecommarce_business .content .left_content {
+	float: inherit;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.ecommarce_business .content .right_content {
+	float: inherit;
+	text-align: center; 
+}
+.services_area .card-body { 
+	top: 205px; 
+}
+.our_portfolio_area .inner-portfolio { 
+	margin-right: 15px;
+}
+.video_icon { 
+	top: 46%; 
+}
+
+}
+
+@media only screen and (max-width: 1112px){
+	.header_slider .first_slider_info { 
+		left: 61px;
+	}
+	.youtube_video .video iframe{
+		width: 500px;
+	}
+}
+
+
+@media only screen and (max-width: 1024px){
+.header_slider .first_slider_info {
+	top: 176px;
+	left: 22px;
+}
+.header_slider .first_slider_info h1 {
+	font-size: 5.3rem;
+}
+.header_slider .first_slider_info .display-4 {
+	font-size: 3.5rem;
+}
+.second_slider_font_size.font-weight-bold.animate__animated.animate__bounceInUp.animate__slower.py-3 {
+	font-size: 48px;
+}
+.header_slider .second_p_txt {
+	font-size: 1.8rem; 
+}
+.ecommarce_business .content h1 {
+	font-size: 3rem;
+}
+}
+
+
+
+
+@media only screen and (max-width: 992px){
+.header_slider .first_slider_info { 
+		left:12px;
+}
+.header_slider .first_slider_info h1 {
+	font-size: 5.3rem;
+}
+.why_choose_us_area .btn-group-lg > .btn, .btn-lg {
+	padding: 1rem 3rem;
+}
+.services_area .card {
+	min-height: 66.7rem;
+}
+.services_area .card-body {
+	padding: 3.2rem;
+}
+.youtube_video .video iframe {
+	width: 100%;
+}
+}
+
+
+
+
+@media only screen and (max-width: 824px){
+.header_slider .first_p {
+	font-size: 1.3rem;
+}
+.header_slider .first_slider_info .display-4 {
+	font-size: 2.2rem;
+}
+.header_slider .second_p {
+	font-size: 1.3rem;
+}
+.header_slider .first_slider_info h1 {
+	font-size: 4.3rem;
+}
+.second_slider_font_size.font-weight-bold.animate__animated.animate__bounceInUp.animate__slower.py-3 {
+	font-size: 40px;
+}
+.header_slider .second_p_txt {
+	font-size: 1.5rem; 
+}
+.header_slider .first_slider_info {
+	top: 140px; 
+}
+.why_choose_us_area .btn-group-lg > .btn, .btn-lg {
+	padding: 1rem 3rem;
+}
+.services_area .card-body {
+	top: 166px;
+}
+.button {
+	padding: 8px 8px;
+}
+.counting_area .count_icon i {
+	font-size: 5rem;
+	line-height: 98px;
+}
+.counting_area .number span {
+	font-size: 4rem;
+	line-height: 45px;
+}
+.counting_area .counting_inner_num {
+	margin-bottom: 0rem;
+}
+.our_strength .fas { 
+	font-size: 18px;
+	width: 50px;
+	height: 50px; 
+	line-height: 50px; 
+}
+.youtube_video .video iframe {
+	width: 100%;
+}
+
+}
+
+
+
+@media only screen and (max-width: 768px){ 
+.custom-toggler.navbar-toggler {
+  border-color: rgb(255,255,255);
+} 
+.header_slider {
+	display: none;
+}
+.navbar-brand {
+	padding-top: 1.313rem;
+	margin: left!important;
+}
+.ecommarce_business {
+	min-height: 400px;
+}
+.ecommarce_business .content h1 {
+	font-size: 3rem;
+	line-height: 5rem;
+	text-align: center;
+	padding-top: 70px;
+}
+.ecommarce_business .content .left_content {
+	float: inherit;
+	width: 100%;
+}
+.ecommarce_business .content .right_content {
+	float: inherit;
+	width: 100%;
+	text-align: center;
+}
+.services_area .card-body {
+	top: 504px;
+}
+.services_area .card {
+	min-height: 77.7rem;
+}
+.button {
+	padding: 8px 65px;
+}
+.counting_area .counting_num {
+	margin-left: inherit;
+	text-align: center;
+	display: inherit; 
+}
+.counting_area .count_icon i {
+	margin-right: 1rem;
+}
+.left_side {
+	float: left;
+	width: 100%; 
+}
+.right_side {
+	float: left;
+	width: 100%;
+	padding-bottom: 30px;
+}
+.here_work_area .inner_content { 
+	margin-bottom: 60px;
+}
+.counting_area .counting_inner_num {
+	margin-left: 260px;
+	padding-top: 36px;
+}
+.our_strength .fas { 
+	font-size: 30px;
+	width: 80px;
+	height: 80px; 
+	line-height: 80px; 
+}
+.our_strength .first_content {
+	margin-left: 70px;
+	text-align: center;
+}
+.why_choose_us_area .inner_txt { 
+	margin-left: 70px;
+	text-align: center;
+}
+.youtube_video { 
+	margin-left: 130px;
+}
+.what_is_inner .align-center { 
+	padding-bottom: 30px;
+}
+.footer_content {
+	padding-bottom: 50px;
+	margin-left: 50px;
+}
+.freetrial_form .contact-info img {
+	margin-bottom: inherit;
+}
+.freetrial_form .contact-info h2 {
+	margin-bottom: inherit;
+}
+.freetrial_form .contact-info {
+	margin-top: inherit;
+}
+.pricingTable { 
+	margin-bottom: 30px;
+}
+
+
+
+}
+@media only screen and (max-width: 668px){
+.services_area .card-body {
+	top: 410px;
+}
+.services_area .card-title {
+	margin-top: 20px;
+}
+.services_area .card {
+	min-height: 77.7rem;
+}
+.services_area .card-body {
+	top: 435px;
+}
+.why_choose_us_area .inner_txt {
+	margin-left: inherit;
+	text-align: inherit;
+}
+.button {
+	padding: 5px 50px;
+}
+.counting_area .counting_inner_num {
+	margin-left: 215px;
+	padding-top: 36px;
+}
+.youtube_video {
+	margin-left: 80px;
+}
+
+}
+
+
+@media only screen and (max-width: 575px){
+.services_area .card-body {
+	top: 370px;
+}
+.counting_area .counting_inner_num {
+	margin-left: 165px;
+	padding-top: 36px;
+} 
+.our_strength .first_content {
+	margin-left: inherit;
+	text-align: inherit;
+}
+.youtube_video {
+	margin-left: inherit;
+}
+.footer_content { 
+	margin-left: inherit;
+}
+
+}
+
+@media only screen and (max-width: 414px){
+.navbar-brand.logo img{
+	width: 130px;
+}
+.ecommarce_business .content h1 { 
+	padding-top: 65px;
+}
+.services_area .card-body {
+	top: 259px;
+}
+.services_area .card {
+	min-height: 67.7rem;
+}
+.button {
+	padding: 5px 8px;
+}
+.first_content h1 { 
+	font-size: 30px;
+	text-align: center;
+}
+.our_strength .first_content p {
+	max-width: 100%;
+	text-align: justify;
+	padding-right: inherit; 
+}
+.our_strength .fas { 
+	font-size: 18px;
+	width: 50px;
+	height: 50px; 
+	line-height: 50px; 
+}
+.counting_area .counting_inner_num {
+	margin-left: 90px; 
+}
+.youtube_video .video iframe {
+	width: 383px;
+} 
+
+
+}
+@media only screen and (max-width: 320px){
+ 
+.navbar-brand.logo img{
+	width: 110px;
+}
+.services_area .card-body {
+	top: 197px;
+}
+.left_side {
+	display:inherit;
+}
+.right_side {
+	display:inherit;
+} 
+.counting_area .counting_inner_num {
+	margin-left: 25px;
+}
+.counting_area .count_icon i {
+	margin-right: 3rem;
+}
+.youtube_video .video iframe {
+	width: 289px;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

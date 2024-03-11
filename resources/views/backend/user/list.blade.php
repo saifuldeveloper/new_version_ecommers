@@ -7,7 +7,7 @@
                 <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Users
-                             List</h1>
+                            List</h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">
                                 <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
@@ -242,9 +242,12 @@
                                         </i>Export</button>
                                     <!--end::Export-->
                                     <!--begin::Add user-->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_add_user">
-                                        <i class="ki-duotone ki-plus fs-2"></i>Add User</button>
+                                    @can('create-user')
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_add_user">
+                                            <i class="ki-duotone ki-plus fs-2"></i>Add User</button>
+                                    @endcan
+
                                     <!--end::Add user-->
                                 </div>
                                 <!--end::Toolbar-->
@@ -259,11 +262,12 @@
                                 </div>
                                 <!--end::Group actions-->
                                 <!--begin::Modal - Adjust Balance-->
-                                    @include('backend.user.modal.export')
-                                
+                                @include('backend.user.modal.export')
+
                                 <!--end::Modal - New Card-->
                                 <!--begin::Modal - Add task-->
-                                   @include('backend.user.modal.create');
+                                @include('backend.user.modal.create')
+                                @include('backend.user.modal.edit')
                                 <!--end::Modal - Add task-->
                             </div>
                             <!--end::Card toolbar-->
@@ -288,23 +292,6 @@
 
 
 
-<script>
-   $(document).ready(function() {
-    const form = document.getElementById('kt_modal_add_user_form');
-    $('#kt_modal_add_user_form').submit(function(event) {
-        event.preventDefault();
-        const endpoint = form.action;
-        $.ajax({
-            url: endpoint,
-            method: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                console.log(response);
-                $('#kt_modal_add_user').modal('hide');
-            },
-            error: function(xhr, status, error) {
-                var response = xhr.responseJSON;
-                console.log(response);
     <script>
         $(document).ready(function() {
             const form = document.getElementById('kt_modal_add_user_form');
@@ -338,19 +325,9 @@
                         var response = xhr.responseJSON;
                         console.log(response);
 
+                        if (response && response.errors) {
+                            $('.error-message').text('');
 
-                if (response && response.errors) {
-                    // Clear existing error messages
-                    $('.error-message').text('');
-
-
-                    $.each(response.errors, function(key, value) {
-                        var errorMessageContainer = $('#' + key).next('.error-message');
-                        errorMessageContainer.text(value[0]);
-                    });
-                } else {
-                    console.log('An unexpected error occurred.');
-                }
                             $.each(response.errors, function(key, value) {
                                 var errorMessageContainer = $('#' + key +
                                     '-error');
@@ -368,10 +345,130 @@
                 });
             });
 
+            const userUpdateform = document.getElementById('kt_modal_edit_user_form');
+            $('#kt_modal_edit_user_form').submit(function(event) {
+                event.preventDefault();
+
+                // Disable submit button and show loading spinner
+                $('#UserUpdateButton').prop('disabled', true);
+                $('#UserUpdateButton .spinner-border').removeClass('d-none');
+
+                const formData = new FormData(userUpdateform);
+                const endpoint = userUpdateform.action;
+                $.ajax({
+                    url: endpoint,
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#kt_modal_edit_user').modal('hide');
+                        if (response.error) {
+                            handleError(response.error);
+                        } else {
+                            handleSuccess(response.message);
+                        }
+                        window.location.href = "{{ route('user.list') }}";
+                    },
+                    error: function(xhr, status, error) {
+                        handleError('Error: Something went wrong');
+                        var response = xhr.responseJSON;
+                        console.log(response);
+
+                        if (response && response.errors) {
+                            $('.error-message').text('');
+
+                            $.each(response.errors, function(key, value) {
+                                var errorMessageContainer = $('#' + key +
+                                    '-error');
+                                errorMessageContainer.text(value[0]);
+                            });
+                        } else {
+                            console.log('An unexpected error occurred.');
+                        }
+                    },
+                    complete: function() {
+                        // Enable submit button and hide loading spinner
+                        $('#UserUpdateButton').prop('disabled', false);
+                        $('#UserUpdateButton .spinner-border').addClass('d-none');
+                    }
+                });
+            });
+
+            $(document).on('click', '#deleteUser', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('user-id');
+                var deleteUrl = "{{ route('user.delete', ['id' => ':id']) }}";
+                deleteUrl = deleteUrl.replace(':id', userId);
+                Swal.fire({
+                    text: `Are you sure you want to delete this user?`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-danger",
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: deleteUrl,
+                            method: 'POST',
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                if (response.error) {
+                                    handleError(response.error);
+                                } else {
+                                    handleSuccess(response.message);
+                                }
+                                window.location.href = "{{ route('user.list') }}";
+                            },
+                            error: function(xhr, status, error) {
+                                handleError('Error: Something went wrong');
+                            }
+                        });
+                    }
+                });
+            });
+
+            $(document).on('click', '#edit-user', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('user-id');
+                var userName = $(this).data('user-name');
+                var userEmail = $(this).data('user-email');
+                var userRole = $(this).data('user-role');
+                var userImage = $(this).data('user-image');
+
+                // Set the form values in the modal
+                $('#user_id').val(userId);
+                $('#user-name').val(userName);
+                $('#user-email').val(userEmail);
+                $('#user_role_select option').each(function() {
+                    if ($(this).val() == userRole) {
+                        $(this).attr('selected', 'selected');
+                    } else {
+                        $(this).removeAttr('selected');
+                    }
+                });
+                $('#user_role_select').trigger('change');
+
+                var imageUrl = "{{ asset('storage/') }}" + "/" + userImage;
+                $('#userImage').css('background-image', 'url(' + imageUrl + ')');
+
+                // var encodedImageName = encodeURIComponent(userImage);
+                // var imageUrl = "{{ asset('storage/') }}" + "/" + encodedImageName;
+                // $('#userImage').css('background-image', 'url(' + imageUrl + ')');
+
+            });
+
             function handleSuccess(message) {
                 configureToastr();
                 toastr.success(message);
-                console.log(message);
             }
 
             function handleError(error) {
@@ -400,20 +497,15 @@
                 };
             }
         });
-    });
-});
+    </script>
 
-
-</script>
     {!! $dataTable->scripts() !!}
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#users-table').DataTable();
         });
     </script>
 
 
 
-
 @endsection
-
