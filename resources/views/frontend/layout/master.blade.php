@@ -43,6 +43,10 @@
     <!--main js file-->
     <script src="{{ asset('assets/frontend') }}/assets/js/main.js"></script>
     @yield('script')
+
+
+
+    
 </body>
 
 </html>

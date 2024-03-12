@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\PagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,17 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view('backend.dashboard.index');
     })->name('dashboard');
 });
+
+
+
+// ===========forntend=================
+
+Route::get('/services', [PagesController::class, 'services'])->name('services.page');
+Route::get('/pricing', [PagesController::class, 'pricing'])->name('pricing.page');
+Route::get('/free-trial', [PagesController::class, 'freetrail'])->name('freetrail.page');
+Route::get('/portfolio', [PagesController::class, 'portfolio'])->name('portfolio.page');
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact.page');
+Route::get('/about-us', [PagesController::class, 'about'])->name('about.page');
 
 
 Auth::routes();

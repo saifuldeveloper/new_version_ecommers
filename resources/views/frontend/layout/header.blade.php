@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="./home.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown mega-area">
                     <a class="nav-link dropdown-toggle" href="./service-one.html" id="mega-one" data-toggle="dropdown"
@@ -51,13 +51,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./pricing.html">Pricing</a>
+                    <a class="nav-link" href="{{ route('pricing.page') }}">Pricing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./About.html">About Us</a>
+                    <a class="nav-link" href="{{ route('about.page') }}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./contact.html">Contact Us</a>
+                    <a class="nav-link" href="{{ route('contact.page') }}">Contact Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link btn freeTrial_btn_bg" href="#">Free

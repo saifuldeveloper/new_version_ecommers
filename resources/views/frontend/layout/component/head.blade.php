@@ -12,6 +12,7 @@
     <link href="{{ asset('assets/frontend') }}/assets/css/prism.css" rel="stylesheet" />
     <!-- image comparision link -->
     <link rel="stylesheet" href="{{ asset('assets/frontend') }}/assets/css/beforeafter.css" />
+
     <!-- animate css link -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend') }}/assets/css/animate.min.css" />
     <!-- slick slider css -->
