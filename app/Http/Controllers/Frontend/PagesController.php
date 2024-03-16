@@ -15,18 +15,18 @@ class PagesController extends Controller
     public function pricing(){
         return view('frontend.pricing.pricing');
 
-        
+
     }
     public function freetrail(){
         return view('frontend.freeTrail.free_trail');
-        
+
     }
     public function portfolio(){
-        
+        return view('frontend.portfolio.portfolio');
     }
 
     public function contact(){
-       
+
         return view('frontend.contact.contact');
     }
 

@@ -1,4 +1,4 @@
-@extends('frontend.layout.master')
+@extends('frontend.layout.masterTwo')
 @section('title', 'Services')
 
 @section('content')
@@ -365,7 +365,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                                 <div class="cliper_single_box single__box__layout__custom">
 
                                                     <div class="box__icon "><img decoding="async"
-                                                            src="./assets/images/services/clipping-service-1.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-1.jpg"
                                                             alt=""></div>
                                                     <h3 class="box__title"><a
                                                             href="/clipping-path-service/">Clipping Path </a></h3>
@@ -392,7 +392,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a
@@ -421,7 +421,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a href="/neck-joining-service/">Neck
@@ -455,7 +455,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a
@@ -484,7 +484,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a href="/retouching-service/">Retouching
@@ -512,7 +512,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a href="/masking-service/">Masking
@@ -546,7 +546,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a
@@ -575,7 +575,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a
@@ -604,7 +604,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
                                                     <div class="box__icon ">
                                                         <img decoding="async"
-                                                            src="./assets/images/services/clipping-service-2.jpg"
+                                                            src="{{ asset('assets/frontend') }}/assets/images/services/clipping-service-2.jpg"
                                                             alt="">
                                                     </div>
                                                     <h3 class="box__title"><a href="/image-shadow-service/">Image

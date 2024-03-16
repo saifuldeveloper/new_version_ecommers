@@ -1,4 +1,4 @@
-@extends('frontend.layout.master')
+@extends('frontend.layout.masterTwo')
 @section('title', 'Services')
 
 @section('content')
@@ -297,11 +297,11 @@
             opacity: 0.5;
         }
     </style>
-    
+
     <link rel="stylesheet" id="cliper-blog-css" href="{{ asset('assets/frontend') }}/assets/css/pages-service-one.css" media="all">
     <link rel="stylesheet" id="elementor-frontend-css" href="{{ asset('assets/frontend') }}/assets/css/frontend-lite.min.css" media="all">
     <link rel="stylesheet" href="{{ asset('assets/frontend') }}/assets/css/pricing.css">
-    
+
     <div class="banner-area white">
         <div class="banner-area-bg"></div>
         <div class="container">
@@ -1421,7 +1421,7 @@
             <!--Client reviews end-->
         </div>
     </div>
-    
+
 
     <script src="{{ asset('assets/frontend') }}/assets/js/jquery.js" id="jquery-core-js"></script>
     <script src="{{ asset('assets/frontend') }}/assets/js/bootstrap.min.js" id="bootstrap-js"></script>
@@ -1434,7 +1434,7 @@
     </script>
     <script src="{{ asset('assets/frontend') }}//assets/js/main-service-one.js" id="cliper-active-js"></script>
     <script id="cliper-active-js-after">
-    
+
     jQuery(document).ready(function(){
                         "use strict";
                         jQuery("a.scrolltop").on("click", function (event) {
@@ -1447,16 +1447,16 @@
                             event.preventDefault();
                         });
                     });
-                
-    
+
+
                     jQuery(document).ready(function(){
                         "use strict";
                         jQuery("#mainnav-area").sticky({
                             topSpacing: 0
                         });
                     });
-                
-    
+
+
                     jQuery(document).ready(function(){
                         "use strict";
                         var sticky_sidebar = jQuery(".content-area .product__content__wrap,.content-area .product__widgets__wrap");
@@ -1464,7 +1464,7 @@
                             additionalMarginTop: 0
                         });
                     });
-    </script> 
-    
+    </script>
+
 
 @endsection

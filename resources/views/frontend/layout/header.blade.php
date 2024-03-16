@@ -14,7 +14,7 @@
                     <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown mega-area">
-                    <a class="nav-link dropdown-toggle" href="./service-one.html" id="mega-one" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="#" id="mega-one" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         Services
                     </a>
@@ -22,29 +22,29 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
                                 <h2>Main Services</h2>
-                                <a href="./service-one.html" class="dropdown-item">Clipping Path
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Clipping Path
                                     Service</a>
-                                <a href="./service-one.html" class="dropdown-item">Photo
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Photo
                                     Retouching Service</a>
-                                <a href="./service-one.html" class="dropdown-item">Neck
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Neck
                                     Joint Service</a>
-                                <a href="./service-one.html" class="dropdown-item">Masking
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Masking
                                     Service</a>
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <h2></h2>
-                                <a href="./service-one.html" class="dropdown-item">Shadow
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Shadow
                                     Creation Service</a>
-                                <a href="./service-one.html" class="dropdown-item">Color
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Color
                                     Correction Service</a>
-                                <a href="./service-one.html" class="dropdown-item">Jewellery
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Jewellery
                                     Retouching Service</a>
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <h2>Special Services</h2>
-                                <a href="./service-one.html" class="dropdown-item">Raster To
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Raster To
                                     Vector Conversion</a>
-                                <a href="./service-one.html" class="dropdown-item">Graphic Design
+                                <a href="{{ route('services.page') }}" class="dropdown-item">Graphic Design
                                     Service</a>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                     <a class="nav-link" href="{{ route('contact.page') }}">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn freeTrial_btn_bg" href="#">Free
+                    <a class="nav-link btn freeTrial_btn_bg" href="{{ route('freetrail.page') }}">Free
                         Trial</a>
                 </li>
             </ul>
